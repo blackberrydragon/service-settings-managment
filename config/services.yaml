@@ -22,3 +22,32 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    service_1:
+        class: App\Service\Http\HttpService
+        arguments:
+            $service_name: 'http_service'
+#            $client: "@httpClient"
+            $url: 'http://http-service/settings'
+
+    service_2:
+        class: App\Service\Grpc\GrpcService
+        arguments:
+            $service_name: 'grpc_service'
+#            $client: "@grpcClient"
+
+    service_3:
+        class: App\Service\Rest\RestService
+        arguments:
+            $service_name: 'rest_service'
+#            $client: "@httpClient"
+            $url: 'http://rest-service/settings'
+
+    App\Service\SettingServiceInterface:
+        class: App\Service\SettingsService
+        arguments:
+            $services:
+                - '@service_1'
+                - '@service_2'
+                - '@service_3'
+

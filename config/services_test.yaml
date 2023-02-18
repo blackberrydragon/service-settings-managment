@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    public: true
+
+  test_setting_service: '@App\Service\SettingServiceInterface'
+
